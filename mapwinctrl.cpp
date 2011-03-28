@@ -7,21 +7,14 @@ void MapWinCtrl::goToAddUser(){
 
     addUserWin = new AddUserWindow();
     addUserWin->show();
-    genUI::center(*addUserWin);
+    genCTRL::center(*addUserWin);
 }
 
 void MapWinCtrl::goToAddFac(){
 
     addFac = new AddFacility();
     addFac->show();
-    genUI::center(*addFac);
+    genCTRL::center(*addFac);
 }
-
-/*void MapWinCtrl::goToLogin(){
-
-    login = new LoginWindow();
-    login->show();
-    genUI::center(*login);
-}*/
 
 

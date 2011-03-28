@@ -2,42 +2,39 @@
 #include "ui_loginwindow.h"
 
 #include <iostream>
+#include <QApplication>
+#include <QKeyEvent>
+
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
-    this->setPalette(Qt::black);
+    this->setPalette(Qt::white);
     setWindowTitle("EOBC Login");
+
+    ui->pwordLine->setEchoMode(QLineEdit::Password);
 
     connect(ui->cancelBtn, SIGNAL(pressed()), this, SLOT(on_cancelBtn_clicked()));
     connect(ui->loginBtn, SIGNAL(pressed()), this, SLOT(on_loginBtn_clicked()));
 
     loginCtrl = new LoginWindowCtrl();
 
-    setColors();
+    setScheme();
 }
 
-LoginWindow::~LoginWindow()
-{
-    delete ui;
-}
+LoginWindow::~LoginWindow(){delete ui;}
 
-void LoginWindow::on_cancelBtn_clicked()
-{
-    this->close();
-}
+void LoginWindow::on_cancelBtn_clicked(){this->close();}
 
 void LoginWindow::on_loginBtn_clicked()
 {
 
-    name = ui->nameTxtBox->toPlainText();
-    pword = ui->pwordTxtBox->toPlainText();
+    name = ui->nameLine->text();
+    pword = ui->pwordLine->text();
 
-    aUser = loginCtrl->authenticate(pword, name);
-
-    if(aUser->getId() == pword.toInt() && aUser->getName() == name){
+    if(loginCtrl->authenticate(pword, name)){
 
         loginCtrl->goToMap();
         this->close();
@@ -45,36 +42,44 @@ void LoginWindow::on_loginBtn_clicked()
     else{
 
         loginCtrl->invalid();
-        ui->pwordTxtBox->clear();
-        ui->nameTxtBox->clear();
+        ui->pwordLine->clear();
+        ui->nameLine->clear();
     }
 
 }
 
-void LoginWindow::setColors(){
-
-    QPalette labelPal(Qt::white);
-    labelPal.setColor( QPalette::Text, QColor(0,0,0) );
-    labelPal.setColor( QPalette::Foreground, QColor(255,255,255) );
-
-    QPalette btnPal(Qt::black);
-    //btnPal.setColor( QPalette::Button, QColor(0,0,0) );
-    btnPal.setColor( QPalette::ButtonText, QColor(0,0,0) );
-
-    ui->userLabel_2->setPalette(labelPal);
-    ui->pwordLabel_2->setPalette(labelPal);
-
-    ui->cancelBtn->setStyleSheet(" background-color: orange;");
-    ui->cancelBtn->setPalette(btnPal);
-    ui->loginBtn->setStyleSheet(" background-color: orange");
-    ui->loginBtn->setPalette(btnPal);
+void LoginWindow::setScheme(){
 
     QImage welcome("welcome.png");
+    QImage cross("red_cross2.png");
 
     ui->welcomeLabel->setScaledContents(TRUE);
     ui->welcomeLabel->setPixmap(QPixmap::fromImage(welcome));
 
+    ui->crossImg->setScaledContents(TRUE);
+    ui->crossImg->setPixmap(QPixmap::fromImage(cross));
 
+    QPalette btnPal(Qt::white);
+    btnPal.setColor(QPalette::ButtonText, QColor(255, 255, 255));
+
+    ui->loginBtn->setStyleSheet("background-color: red");
+    ui->cancelBtn->setStyleSheet("background-color: red");
+
+    ui->loginBtn->setPalette(btnPal);
+    ui->cancelBtn->setPalette(btnPal);
+
+
+}
+
+void LoginWindow::keyPressEvent(QKeyEvent *event){
+
+    switch(event->key()){
+
+    case Qt::Key_Escape:
+        qApp->quit();
+        break;
+
+    }
 }
 
 

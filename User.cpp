@@ -1,14 +1,14 @@
 #include "User.h"
 
 User::User(){
-    id = 0;
+    id = "";
     name = "";
     workAtFacility = "";
 }
 
 User::~User(){}
 
-User::User(int aId, QString aName, QString aFacility)
+User::User(QString aId, QString aName, QString aFacility)
 {
     id = aId;
     name = aName;
@@ -16,7 +16,7 @@ User::User(int aId, QString aName, QString aFacility)
 }
 
 //Return id
-int User::getId()
+QString User::getId()
 {
     return id;
 }

@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += webkit
+QT       += sql
 
 TARGET = LoginProcess
 TEMPLATE = app
@@ -23,7 +25,9 @@ SOURCES += main.cpp\
     map.cpp \
     Facility.cpp \
     addfacility.cpp \
-    addfacctrl.cpp
+    addfacctrl.cpp \
+    googlemap.cpp \
+    genctrl.cpp
 
 HEADERS  += loginwindow.h \
     User.h \
@@ -37,7 +41,9 @@ HEADERS  += loginwindow.h \
     map.h \
     Facility.h \
     addfacility.h \
-    addfacctrl.h
+    addfacctrl.h \
+    googlemap.h \
+    genctrl.h
 
 FORMS    += loginwindow.ui \
     mapwindow.ui \

@@ -2,7 +2,7 @@
 #include <QDesktopWidget>
 
 #include "loginwindow.h"
-#include "genui.h"
+#include "genctrl.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     LoginWindow w;
     w.show();
 
-    genUI* temp = new genUI();
+    genCTRL* temp = new genCTRL();
     temp->center(w);
 
     return a.exec();

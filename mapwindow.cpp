@@ -6,11 +6,13 @@ MapWindow::MapWindow(QWidget *parent) :
     ui(new Ui::MapWindow)
 {
     mapCtrl = new MapWinCtrl();
-    QImage img("map.png");
+    QImage img("map2.png");
 
     ui->setupUi(this);
     ui->mapImg->setScaledContents(TRUE);
     ui->mapImg->setPixmap(QPixmap::fromImage(img));
+    //aMap = new QGoogleMap(this);
+    //aMap->show();
 
     ui->menuFile->addAction(ui->actionLogout);
     ui->menuAdmin->addAction(ui->actionAdd_newUser);
@@ -20,23 +22,19 @@ MapWindow::MapWindow(QWidget *parent) :
     connect(ui->actionCreate_Facility, SIGNAL(triggered()), this, SLOT(createFac_clicked()));
 }
 
-MapWindow::~MapWindow()
-{
-    delete ui;
+MapWindow::~MapWindow(){delete ui;}
+
+void MapWindow::createUser_clicked(){mapCtrl->goToAddUser();}
+
+void MapWindow::createFac_clicked(){mapCtrl->goToAddFac();}
+
+void MapWindow::keyPressEvent(QKeyEvent *event){
+
+    switch(event->key()){
+
+    case Qt::Key_Escape:
+        qApp->quit();
+        break;
+
+    }
 }
-
-
-void MapWindow::createUser_clicked(){
-
-    mapCtrl->goToAddUser();
-}
-
-void MapWindow::createFac_clicked(){
-
-    mapCtrl->goToAddFac();
-}
-
-/*void MapWindow::logout_clicked(){
-
-    mapCtrl->goToLogin();
-}*/

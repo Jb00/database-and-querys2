@@ -9,22 +9,35 @@ InvalidWindow::InvalidWindow(QWidget *parent) :
     this->setPalette(Qt::white);
     connect(ui->okBtn, SIGNAL(clicked()), this, SLOT(on_okBtn_clicked()));
 
-    displayWarning();
+    setScheme();
 }
 
-InvalidWindow::~InvalidWindow()
-{
-    delete ui;
-}
+InvalidWindow::~InvalidWindow(){delete ui;}
 
-void InvalidWindow::on_okBtn_clicked(){
+void InvalidWindow::on_okBtn_clicked(){this->close();}
 
-    this->close();
-}
-
-void InvalidWindow::displayWarning(){
+void InvalidWindow::setScheme(){
 
     QImage warning("warning.jpg");
     ui->warningImg->setScaledContents(TRUE);
     ui->warningImg->setPixmap(QPixmap::fromImage(warning));
+
+    QPalette btnPal(Qt::white);
+    btnPal.setColor(QPalette::ButtonText, QColor(255, 255, 255));
+
+    ui->okBtn->setStyleSheet("background-color: red");
+
+    ui->okBtn->setPalette(btnPal);
+
+}
+
+void InvalidWindow::keyPressEvent(QKeyEvent *event){
+
+    switch(event->key()){
+
+    case Qt::Key_Escape:
+        this->close();
+        break;
+
+    }
 }

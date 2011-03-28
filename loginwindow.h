@@ -3,15 +3,16 @@
 
 #include <QMainWindow>
 #include <QDialog>
+#include <QKeyEvent>
 
 #include "loginwindowctrl.h"
-#include "mapwindow.h"
+#include "genui.h"
 
 namespace Ui {
     class LoginWindow;
 }
 
-class LoginWindow : public QMainWindow
+class LoginWindow : public QMainWindow, public genUI
 {
     Q_OBJECT
 
@@ -19,7 +20,8 @@ public:
     explicit LoginWindow(QWidget *parent = 0);
     ~LoginWindow();
 
-    void setColors();
+    void setScheme();
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::LoginWindow *ui;

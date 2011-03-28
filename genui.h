@@ -1,8 +1,8 @@
 #ifndef GENUI_H
 #define GENUI_H
 
-#include <QDesktopWidget>
 #include <QWidget>
+#include <QKeyEvent>
 #include <QApplication>
 
 class genUI
@@ -10,7 +10,9 @@ class genUI
 public:
     genUI();
     ~genUI();
-    void center(QWidget &);
+
+    virtual void keyPressEvent(QKeyEvent * event);
+    virtual void setScheme();
 };
 
 #endif // GENUI_H

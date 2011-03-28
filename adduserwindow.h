@@ -2,6 +2,7 @@
 #define ADDUSERWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 #include "adduserctrl.h"
 
@@ -16,6 +17,8 @@ class AddUserWindow : public QMainWindow
 public:
     explicit AddUserWindow(QWidget *parent = 0);
     ~AddUserWindow();
+
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::AddUserWindow *ui;

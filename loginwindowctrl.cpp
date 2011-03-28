@@ -2,28 +2,48 @@
 
 #include "loginwindowctrl.h"
 
-LoginWindowCtrl::LoginWindowCtrl(){}
+LoginWindowCtrl::LoginWindowCtrl(QWidget *parent) :
+        QWidget(parent){
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName ("/home/bartosz/Documents/EOBCSTORAGE");
+    if (!db.open()) {
+        QMessageBox::warning(this, QObject::tr("Unable to open database"), QObject::tr("An error occured while "
+                                                                     "opening the connection: ") + db.lastError().text());}
+}
 LoginWindowCtrl::~LoginWindowCtrl(){}
 
-User* LoginWindowCtrl::authenticate(QString n, QString p){
+bool LoginWindowCtrl::authenticate(QString n, QString p){
 
-    aUser = new User(1123, "Bart", "Hell");
+    QSqlQuery query("SELECT * FROM user");
 
-return aUser;
+    int pwordNum = query.record().indexOf("password");
+    int nameNum = query.record().indexOf("username");
+
+    while(query.next()){
+
+        queryName = query.value(nameNum).toString();
+        queryPword = query.value(pwordNum).toString();
+
+        if(queryName.toStdString() == n.toStdString() && queryPword.toStdString() == p.toStdString())
+            return true;
+    }
+
+return false;
 }
 
 void LoginWindowCtrl::invalid(){
 
     invalidEntry = new InvalidWindow();
     invalidEntry->show();
-    genUI::center(*invalidEntry);
+    genCTRL::center(*invalidEntry);
 }
 
 void LoginWindowCtrl::goToMap(){
 
     mapWin = new MapWindow();
     mapWin->show();
-    genUI::center(*mapWin);
+    genCTRL::center(*mapWin);
 }
 
 

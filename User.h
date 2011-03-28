@@ -14,15 +14,15 @@ class User
  protected :
         QString name;
         QString typeUser;
-        int id;
+        QString id;
         QString workAtFacility;
 
 public:
         User();
-        User(int, QString, QString);
+        User(QString, QString, QString);
         ~User();
 
-        int getId();
+        QString getId();
         QString getName();
         QString getFacility();
         QString getType();

@@ -2,8 +2,9 @@
 #define ADDUSERCTRL_H
 
 #include <QDialog>
+#include "genctrl.h"
 
-class AddUserCtrl
+class AddUserCtrl: public genCTRL
 {
 public:
     AddUserCtrl();

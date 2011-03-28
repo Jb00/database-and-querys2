@@ -3,11 +3,10 @@
 
 #include "adduserwindow.h"
 #include "addfacility.h"
-//#include "loginwindow.h"
-#include "genui.h"
+#include "genctrl.h"
 #include "map.h"
 
-class MapWinCtrl: public genUI
+class MapWinCtrl: public genCTRL
 {
 public:
 
@@ -22,7 +21,6 @@ private:
 
     AddUserWindow* addUserWin;
     AddFacility* addFac;
-    //LoginWindow* login;
     Map* map;
 };
 

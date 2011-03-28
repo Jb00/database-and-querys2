@@ -13,10 +13,7 @@ AddUserWindow::AddUserWindow(QWidget *parent) :
     addUserCtrl = new AddUserCtrl();
 }
 
-AddUserWindow::~AddUserWindow()
-{
-    delete ui;
-}
+AddUserWindow::~AddUserWindow(){delete ui;}
 
 void AddUserWindow::on_okBtn_clicked(){
 
@@ -26,7 +23,15 @@ void AddUserWindow::on_okBtn_clicked(){
     careType = ui->careTxt->toPlainText();
 }
 
-void AddUserWindow::on_cancelBtn_clicked(){
+void AddUserWindow::on_cancelBtn_clicked(){this->close();}
 
-    this->close();
+void AddUserWindow::keyPressEvent(QKeyEvent *event){
+
+    switch(event->key()){
+
+    case Qt::Key_Escape:
+        this->close();
+        break;
+
+    }
 }
